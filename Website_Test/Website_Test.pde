@@ -4,7 +4,8 @@ String html;
 int j = 0;
 
 void setup(){
-  rawhtml = loadStrings("https://jyllands-posten.dk/");
+  fullScreen();
+  rawhtml = loadStrings("https://jyllands-posten.dk/Indland/");
    int y = 0;
   
   textAlign(LEFT, TOP);
@@ -13,19 +14,20 @@ void setup(){
   for(int i = 0; i < rawhtml.length; i++) {
     y+=10;
     text(rawhtml[i], 10, y);
-    println(rawhtml[i]);
+    //println(rawhtml[i]);
   }
   //println(""+rawhtml);
   
-   shows = new String[75];
+   shows = new String[rawhtml.length];
 
 
 }
 
 void draw(){
   for(int i = 0; i < rawhtml.length; i++){
-    if(rawhtml[i].indexOf("<div class=\"show-title\">") >= 0){
-      shows[j] = rawhtml[i+3];
+    if(rawhtml[i].indexOf("title=") >= 0){
+      //shows[j] = rawhtml[i-1];
+      println(shows[j]);
       j++;
     }
   }
