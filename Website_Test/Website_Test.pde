@@ -1,35 +1,31 @@
-String[] rawhtml;
-String [] shows;
-String html;
-int j = 0;
+int page = 1;
+int totalPageCount = 8;
+boolean changed; 
+int a = 0;
+PImage Background[] = new PImage[totalPageCount+1]; 
 
-void setup(){
+void setup() {
   fullScreen();
-  rawhtml = loadStrings("https://jyllands-posten.dk/Indland/");
-   int y = 0;
-  
-  textAlign(LEFT, TOP);
-  textSize(10);
-  
-  for(int i = 0; i < rawhtml.length; i++) {
-    y+=10;
-    text(rawhtml[i], 10, y);
-    //println(rawhtml[i]);
+
+  for (int i = 1; i <= totalPageCount; i++) { 
+    Background[i] = loadImage("data/"+i+".jpg");
   }
-  //println(""+rawhtml);
-  
-   shows = new String[rawhtml.length];
-
-
 }
 
-void draw(){
-  for(int i = 0; i < rawhtml.length; i++){
-    if(rawhtml[i].indexOf("title=") >= 0){
-      //shows[j] = rawhtml[i-1];
-      println(shows[j]);
-      j++;
-    }
+void draw() {
+  println(page);
+  //background (0);
+  //image(Background_1, 0, 0);
+
+
+  if (page == a) {
+    a = page;
+  } else {
+    changed = true;
+    a = page;
   }
-  //printArray(shows);
+
+  if (changed == true) { 
+    image(Background[page], 0, 0);
+  }
 }
