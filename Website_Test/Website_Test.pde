@@ -6,7 +6,12 @@ PImage Background[] = new PImage[totalPageCount+1];
 String validCode = "YogaMagnetOst24";
 
 TextField codeField;
-
+Button Ebox;
+Button Sundhed;
+Button Borger;
+Button Netbank;
+Button Luk;
+Button Sidst;
 
 void setup() {
   fullScreen();
@@ -16,6 +21,13 @@ void setup() {
   for (int i = 1; i <= totalPageCount; i++) { 
     Background[i] = loadImage("data/"+i+".jpg");
   }
+
+  Ebox = new Button("Ebox", width/5, height/7, width/5, height/7);
+  Sundhed = new Button("Sundhed", 3*(width/5), height/7, width/5, height/7);
+  Borger = new Button("Borger", width/5, 3*(height/7), width/5, height/7);
+  Netbank = new Button("Netbank", 3*(width/5), 3*(height/7), width/5, height/7);
+  Sidst = new Button("Sidst", width/5, 5*(height/7), width/5, height/7);
+  Luk = new Button("Luk", 3*(width/5), 5*(height/7), width/5, height/7);
 }
 
 void draw() {
@@ -36,17 +48,11 @@ void draw() {
 
     // check login credentials
     if (keyPressed) {
-      if (key == ENTER) {
+      if (key == ' ') {
         String code = codeField.getText();
         if (code.equals(validCode)) {
-          println("yah");
-          // login success
-          fill(0, 255, 0);
-          textSize(16);
-          text("Login successful!", width/2, 180);
+          page++;
         } else {
-          println("nope");
-          // login failed
           fill(255, 0, 0);
           textSize(16);
           text("Invalid username.", width/2, 180);
@@ -54,12 +60,42 @@ void draw() {
       }
     }
   }
+  if (page == 2) {
+    Ebox.draw();
+    Sundhed.draw();
+    Borger.draw();
+    Netbank.draw();
+    Sidst.draw();
+    Luk.draw();
+  }
 }
 
 void keyPressed() {
-  codeField.keyPressed();
+  if (page == 1 && key != 32 && key != CODED) {
+    codeField.keyPressed();
+  }
 }
 
-void keyReleased() {
-  codeField.keyPressed();
-}
+void mousePressed() {
+    if (page == 2) {  
+      if (Ebox.isClicked()) {
+        // Login button is clicked
+      }
+      if (Sundhed.isClicked()) {
+        // Login button is clicked
+      }
+      if (Borger.isClicked()) {
+        // Login button is clicked
+      }
+      if (Netbank.isClicked()) {
+        // Login button is clicked
+      }
+      if (Sidst.isClicked()) {
+        // Login button is clicked
+      }
+      if (Luk.isClicked()) {
+        exit();
+      }
+    }
+  }
+  

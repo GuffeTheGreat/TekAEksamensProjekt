@@ -1,7 +1,6 @@
 class TextField {
   int x, y, w, h;
   String text = "";
-  boolean active = true;
 
   TextField(int x, int y, int w, int h) {
     this.x = x;
@@ -12,22 +11,18 @@ class TextField {
 
   void update() {
     stroke(0);
-    if (active) {
     fill(255);
-    } else {
-      fill(200);
-    }
     rect(x, y, w, h);
     noStroke();
     fill(0);
-    textSize(14);
-    text(text, x+5, y+15);
+    textSize(x/5);
+    text(text, width/2, height/2);
   }
 
   void keyPressed() {
-    if (active && keyCode != ENTER && keyCode != BACKSPACE) {
+    if (keyCode != ENTER && keyCode != BACKSPACE) {
       text += key;
-    } else if (active && keyCode == BACKSPACE) {
+    } else if (keyCode == BACKSPACE) {
       text = text.substring(0, max(0, text.length()-1));
     }
   }
