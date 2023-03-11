@@ -12,6 +12,7 @@ Button Borger;
 Button Netbank;
 Button Luk;
 Button Sidst;
+Button Tilbage;
 
 void setup() {
   fullScreen();
@@ -28,13 +29,13 @@ void setup() {
   Netbank = new Button("Netbank", 3*(width/5), 3*(height/7), width/5, height/7);
   Sidst = new Button("Sidst", width/5, 5*(height/7), width/5, height/7);
   Luk = new Button("Luk", 3*(width/5), 5*(height/7), width/5, height/7);
+  Tilbage = new Button("Tilbage", 0, 5*(height/6), width/6, height/6);
 }
 
 void draw() {
 
-  if (page == a) {
-    a = page;
-  } else {
+  // Sideændring Checker
+  if (page != a) {
     changed = true;
     a = page;
   }
@@ -45,57 +46,58 @@ void draw() {
 
   if (page == 1) {
     codeField.update();
-
-    // check login credentials
-    if (keyPressed) {
-      if (key == ' ') {
-        String code = codeField.getText();
-        if (code.equals(validCode)) {
-          page++;
-        } else {
-          fill(255, 0, 0);
-          textSize(16);
-          text("Invalid username.", width/2, 180);
-        }
-      }
-    }
-  }
-  if (page == 2) {
+  } else if (page == 2) {
     Ebox.draw();
     Sundhed.draw();
     Borger.draw();
     Netbank.draw();
     Sidst.draw();
     Luk.draw();
+  } else if (page == 3) {
+    Tilbage.draw();
   }
 }
 
 void keyPressed() {
-  if (page == 1 && key != 32 && key != CODED) {
-    codeField.keyPressed();
+  if (page == 1) {
+    if (key != 32 && key != CODED) {
+      codeField.keyPressed();
+    } else if (key == 32) {
+      String code = codeField.getText();
+      if (code.equals(validCode)) {
+        page++;
+      } else {
+        fill(255, 0, 0);
+        textSize(16);
+        text("Invalid username.", width/2, 180);
+      }
+    }
   }
 }
 
 void mousePressed() {
-    if (page == 2) {  
-      if (Ebox.isClicked()) {
-        // Login button is clicked
-      }
-      if (Sundhed.isClicked()) {
-        // Login button is clicked
-      }
-      if (Borger.isClicked()) {
-        // Login button is clicked
-      }
-      if (Netbank.isClicked()) {
-        // Login button is clicked
-      }
-      if (Sidst.isClicked()) {
-        // Login button is clicked
-      }
-      if (Luk.isClicked()) {
-        exit();
-      }
+  if (page == 2) {  
+    if (Ebox.isClicked()) {
+      page++;
+    }
+    if (Sundhed.isClicked()) {
+      // Login button is clicked
+    }
+    if (Borger.isClicked()) {
+      // Login button is clicked
+    }
+    if (Netbank.isClicked()) {
+      // Login button is clicked
+    }
+    if (Sidst.isClicked()) {
+      // Login button is clicked
+    }
+    if (Luk.isClicked()) {
+      exit();
+    }
+  } else if (page == 3) {
+    if (Tilbage.isClicked()) {
+      page = 2;
     }
   }
-  
+}

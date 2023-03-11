@@ -22,7 +22,7 @@ class Button {
   }
 
   boolean isClicked() {
-    if (mousePressed && mouseX >= x && mouseX <= x+ width && mouseY >= y && mouseY <= y + height) {
+    if (mousePressed && mouseX >= x && mouseX <= x+ w && mouseY >= y && mouseY <= y + h) {
       clicked = true;
     } else {
       clicked = false;
