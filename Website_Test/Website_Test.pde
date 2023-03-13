@@ -1,8 +1,10 @@
+//import processing.core.*;
+
 int page = 1;
 int a = 0;
 int totalPageCount = 8;
-boolean changed; 
-PImage Background[] = new PImage[totalPageCount+1]; 
+boolean changed;
+PImage Background[] = new PImage[totalPageCount+1];
 String validCode = "YogaMagnetOst24";
 
 TextField codeField;
@@ -14,22 +16,34 @@ Button Luk;
 Button Sidst;
 Button Tilbage;
 
-void setup() {
-  fullScreen();
-  textAlign(CENTER);
-  codeField = new TextField(width/5, height/3, 3*(width/5), (height/4));
 
-  for (int i = 1; i <= totalPageCount; i++) { 
+
+void setup() {
+
+  // Fullscreen
+  fullScreen();
+
+  // Title
+  surface.setTitle("Gamle mennesker hjælpe program");
+
+  //Login Side
+  textAlign(CENTER);
+  codeField = new TextField(width/5, height/2-height/12, 3*(width/5), (height/8));
+
+
+  // Load Layout
+  for (int i = 1; i <= totalPageCount; i++) {
     Background[i] = loadImage("data/"+i+".jpg");
   }
 
+  // Create Buttons
   Ebox = new Button("Ebox", width/5, height/7, width/5, height/7);
   Sundhed = new Button("Sundhed", 3*(width/5), height/7, width/5, height/7);
   Borger = new Button("Borger", width/5, 3*(height/7), width/5, height/7);
   Netbank = new Button("Netbank", 3*(width/5), 3*(height/7), width/5, height/7);
   Sidst = new Button("Sidst", width/5, 5*(height/7), width/5, height/7);
-  Luk = new Button("Luk", 3*(width/5), 5*(height/7), width/5, height/7);
-  Tilbage = new Button("Tilbage", 0, 5*(height/6), width/6, height/6);
+  Luk = new Button("Luk", height/12-height/13, height-height/12, width/13, height/13);
+  Tilbage = new Button("Tilbage", 0, height-height/6, width/6, height/6);
 }
 
 void draw() {
@@ -40,12 +54,19 @@ void draw() {
     a = page;
   }
 
-  if (changed == true) { 
+  // Background Opdaterer
+  if (changed == true) {
     image(Background[page], 0, 0);
   }
 
+  // Load Side Elementer
+
+  //Login Side
   if (page == 1) {
     codeField.update();
+    Luk.draw();
+
+    // Menu
   } else if (page == 2) {
     Ebox.draw();
     Sundhed.draw();
@@ -53,6 +74,8 @@ void draw() {
     Netbank.draw();
     Sidst.draw();
     Luk.draw();
+
+    // Eboks
   } else if (page == 3) {
     Tilbage.draw();
   }
@@ -76,7 +99,7 @@ void keyPressed() {
 }
 
 void mousePressed() {
-  if (page == 2) {  
+  if (page == 2) {
     if (Ebox.isClicked()) {
       page++;
     }
@@ -98,6 +121,10 @@ void mousePressed() {
   } else if (page == 3) {
     if (Tilbage.isClicked()) {
       page = 2;
+    }
+  } else if (page == 1) {
+    if (Luk.isClicked()) {
+      exit();
     }
   }
 }
