@@ -6,6 +6,8 @@ PImage Background[] = new PImage[totalPageCount+1];
 String validCode = "YogaMagnetOst24";
 String NemID = "Henriette.Olsen";
 
+PImage cursorImg;
+
 TextField codeField;
 TextField eboxField;
 Button Ebox;
@@ -27,7 +29,10 @@ void setup() {
 
   // Fullscreen
   fullScreen();
-
+    noCursor(); // hide the default cursor
+  cursorImg = loadImage("cursor.png"); // load the cursor image
+  cursor(cursorImg, 16, 16); // set the custom cursor
+  
   // Title
   surface.setTitle("Gamle mennesker hjælpe program");
 
