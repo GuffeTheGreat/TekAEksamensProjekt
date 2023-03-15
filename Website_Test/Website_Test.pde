@@ -1,6 +1,6 @@
 int page = 1;
 int a = 0;
-int totalPageCount = 8;
+int totalPageCount = 18;
 boolean changed;
 PImage Background[] = new PImage[totalPageCount+1];
 String validCode = "YogaMagnetOst24";
@@ -69,7 +69,13 @@ void setup() {
 }
 
 void draw() {
-
+/*
+    //Mus
+  stroke(255, 0, 0);
+  noFill();
+   ellipse(mouseX, mouseY, 50, 50);
+   */
+   
   // Sideændring Checker
   if (page != a) {
     changed = true;
@@ -127,6 +133,8 @@ void draw() {
   }else if (page == 8) {
     Tilbage.draw();
   }
+  
+
 }
 
 void keyPressed() {
@@ -168,7 +176,7 @@ void mousePressed() {
       // Login button is clicked
     }
     if (Borger.isClicked()) {
-      // Login button is clicked
+      page = 9;
     }
     if (Netbank.isClicked()) {
       page = page+2;
@@ -210,6 +218,10 @@ void mousePressed() {
     page = 6;
     }
   } else if (page == 8) {
+    if (Tilbage.isClicked()) {
+    page = 6;
+    }
+  } else if (page == 9) {
     if (Tilbage.isClicked()) {
     page = 6;
     }

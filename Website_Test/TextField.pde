@@ -17,7 +17,7 @@ class TextField {
     fill(0);
     textSize(x/5);
     //println(x/5);
-    text(text, width/2, height/2);
+    text(text, width/2, height/2-h/4);
     textSize(76);
   }
 
