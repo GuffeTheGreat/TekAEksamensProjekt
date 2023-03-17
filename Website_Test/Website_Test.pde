@@ -192,7 +192,9 @@ void draw() {
     Tilbage.draw();
     break;
   case 16:
-
+    netbankField.update();
+    Tilbage.draw();
+    GlemteKode.draw();
     break;
   case 17:
     Tilbage.draw();
@@ -206,6 +208,9 @@ void draw() {
     GlemteKode.draw();
     break;
   case 20:
+    Tilbage.draw();
+    break;
+  case 31:
     Tilbage.draw();
     break;
   }
@@ -245,6 +250,19 @@ void keyPressed() {
       String code = borgerField.getText();
       if (code.equals(NemID)) {
         page = 9;
+      } else {
+        fill(255, 0, 0);
+        textSize(16);
+        text("Invalid username.", width/2, 180);
+      }
+    }
+  } else if (page == 16) {
+    if (key != 32 && key != CODED) {
+      netbankField.keyPressed();
+    } else if (key == 32) {
+      String code = netbankField.getText();
+      if (code.equals(NemID)) {
+        page = 21;
       } else {
         fill(255, 0, 0);
         textSize(16);
@@ -291,6 +309,8 @@ void mousePressed() {
   case 4:
     if (Tilbage.isClicked()) {
       page = 2;
+    } else if (JyskeBank.isClicked()) {
+      page = 16;
     }
     break;
   case 5:
@@ -369,7 +389,11 @@ void mousePressed() {
     }
     break;
   case 16:
-
+    if (Tilbage.isClicked()) {
+      page = 4;
+    } else if (GlemteKode.isClicked()) {
+      page = 31;
+    }
     break;
   case 17:
     if (Tilbage.isClicked()) {
@@ -391,6 +415,18 @@ void mousePressed() {
   case 20:
     if (Tilbage.isClicked()) {
       page = 19;
+    }
+
+    break;
+  case 21:
+    if (Tilbage.isClicked()) {
+      page = 2;
+    }
+
+    break;
+  case 31:
+    if (Tilbage.isClicked()) {
+      page = 16;
     }
 
     break;
