@@ -1,10 +1,10 @@
 int page = 1;
 int a = 0;
-int totalPageCount = 60;
+int totalPageCount = 52;
 boolean changed;
 PImage Background[] = new PImage[totalPageCount+1];
-String validCode = "1";
-String NemID = "2";
+String validCode = "426";
+String NemID = "KimOlsen";
 
 PImage cursorImg;
 
@@ -18,7 +18,6 @@ Button Sundhed;
 Button Borger;
 Button Netbank;
 Button Luk;
-Button Sidst;
 Button Tilbage;
 Button Nordea;
 Button JyskeBank;
@@ -54,7 +53,7 @@ Button SundhedsAftaler;
 Button Vacciner;
 Button Laboratorie;
 Button Medicinkort;
-Button Medicinkort2;
+Button Medicin;
 Button Recepter;
 Button Registreringer;
 Button ScreeningBryst;
@@ -62,8 +61,11 @@ Button ScreeningTarm;
 Button ScreeningLivmoder;
 Button Behandlingstestamente;
 Button Stamkort;
-int kl = (22*width-height)/52;
-int kh = height/7;
+Button Luk2;
+Button Overblik;
+Button LogAfBank;
+Button Fortsæt;
+Button Fortsæt2;
 
 void setup() {
 
@@ -78,15 +80,15 @@ void setup() {
 
   //Login Side
   textAlign(CENTER);
-  codeField = new TextField(width/5, height/2-height/12, 3*(width/5), (height/8));
+  codeField = new TextField(242, 371, 1685-242, 577-371);
   textAlign(CENTER);
-  eboxField = new TextField(width/5, height/2-height/12, 3*(width/5), (height/8));
+  eboxField = new TextField(696, 365, 1220-696, 438-365);
   textAlign(CENTER);
-  borgerField = new TextField(width/5, height/2-height/12, 3*(width/5), (height/8));
+  borgerField = new TextField(696, 365, 1220-696, 438-365);
   textAlign(CENTER);
-  netbankField = new TextField(width/5, height/2-height/12, 3*(width/5), (height/8));
+  netbankField = new TextField(696, 365, 1220-696, 438-365);
   textAlign(CENTER);
-  sundhedField = new TextField(width/5, height/2-height/12, 3*(width/5), (height/8));
+  sundhedField = new TextField(696, 365, 1220-696, 438-365);
 
 
   // Load Layout
@@ -95,52 +97,55 @@ void setup() {
   }
 
   // Create Buttons
-
-  kl = (22*width-height)/52;
-  kh = height/8;
-
   Luk = new Button("Luk", height/12-height/13, height-height/12, width/13, height/13);
-  Tilbage = new Button("Tilbage", 0, height-height/6, width/6, height/6);
+  Tilbage = new Button("Tilbage", 0, 953, 265, 1079-953);
 
-  Ebox = new Button("E-boks", 2*(height/12-height/13)+width/13, height/7, (22*width-height)/52, height/7);
-  Sundhed = new Button("Sundhed.dk", (height/12-height/13)/2+width/2, height/7, (22*width-height)/52, height/7);
-  Borger = new Button("Borger.dk", 2*(height/12-height/13)+width/13, 3*(height/7), (22*width-height)/52, height/7);
-  Netbank = new Button("Netbank", (height/12-height/13)/2+width/2, 3*(height/7), (22*width-height)/52, height/7);
-  Sidst = new Button("Sidst Gjorde Du", 2*(height/12-height/13)+width/13, 5*(height/7), 2*((22*width-height)/52)+(height/12-height/13), height/7);
+  Ebox = new Button("E-boks", 77, 359, 908-77, 594-359);
+  Sundhed = new Button("Sundhed.dk", 996, 636, 1838-996, 884-636);
+  Borger = new Button("Borger.dk", 74, 638, 919-74, 879-638);
+  Netbank = new Button("Netbank", 997, 359, 1838-977, 599-359);
 
 
-  Nordea = new Button("Nordea", width/6+width/128, height/13, width-(width/6+width/128)*2, 3*(height/13));
-  DanskeBank = new Button("Danske Bank", width/6+width/128, 5*(height/13), width-(width/6+width/128)*2, 3*(height/13));
-  JyskeBank = new Button("Jyske Bank", width/6+width/128, 9*(height/13), width-(width/6+width/128)*2, 3*(height/13));
+  JyskeBank = new Button("Nordea", 197, 184, 1723-197, 389-184);
+  DanskeBank = new Button("Danske Bank", 192, 426, 1724-192, 629-426);
+  Nordea = new Button("Jyske Bank", 197, 666, 1722-197, 868-666);
 
-  GlemteKode = new Button("Glemte Kode", width/3, (height/2-height/12)+height/8+height/64, width/3, height/8);
+  GlemteKode = new Button("Glemte Kode", 744, 570, 952-744, 602-570);
+  Fortsæt = new Button("", 699, 467, 1222-699, 540-467);
+  Fortsæt2 = new Button("", 601, 679, 1322-601, 859-679);
 
-  Offentlige = new Button("Offentlige", width/7, height/6, 2*(width/7), height/2);
-  Virksomheder = new Button("Virksomheder", 4*(width/7), height/6, 2*(width/7), height/2);
+  Offentlige = new Button("Offentlige", 237, 277, 886-237, 801-277);
+  Virksomheder = new Button("Virksomheder", 1034, 276, 1681-1034, 804-276);
 
-  Personlige = new Button("Personlige Oplysninger", 2*(height/12-height/13)+width/13, kh, kl, kh);
-  Sager = new Button("Sager", (height/12-height/13)/2+width/2, kh, kl, kh);
-  Gæld = new Button("Gæld", 2*(height/12-height/13)+width/13, 3*kh, kl, kh);
-  Aftaler = new Button("Aftaler", (height/12-height/13)/2+width/2, 3*kh, kl, kh);
-  Hjælpemidler = new Button("Serviceydelser", 3*(height/12-height/13)+width/13, 5*kh, kl, kh);
-  Ydelser = new Button("Økonomiske Ydelser", 3*(height/12-height/13)/2+width/2, 5*kh, kl, kh);
+  Personlige = new Button("Personlige Oplysninger", 71, 193, 924-71, 365-193);
+  Sager = new Button("Sager", 995, 206, 1849-995, 367-206);
+  Gæld = new Button("Gæld", 71, 434, 924-71, 609-434);
+  Aftaler = new Button("Aftaler", 999, 441, 1845-1000, 606-441);
+  Hjælpemidler = new Button("Serviceydelser", 71, 677, 925-71, 850-677);
+  Ydelser = new Button("Økonomiske Ydelser", 993, 675, 1847-993, 849-675);
 
-  Bolig = new Button("Bolig", width/7, height/6, 2*(width/7), height/2);
-  PO = new Button("Personlige Oplysninger", 4*(width/7), height/6, 2*(width/7), height/2);
+  Bolig = new Button("Bolig", 151, 355, 882-151, 769-355);
+  PO = new Button("Personlige Oplysninger", 1034, 355, 1768-1034, 770-355);
+  Luk2 = new Button("Luk Program", 1465, 0, 1919-1465, 123);
 
-  KontoBudget = new Button("Konto & Budget", width/3, height/3, width/3, height/3);
-  BetalOverfør = new Button("Betal & Overfør", width/3, height/3, width/3, height/3);
-  PensionForsikring = new Button("Pension & Forsikring", width/3, height/3, width/3, height/3);
-  KontoBevægelser = new Button("KontoBevægelser", width/3, height/3, width/3, height/3);
-  KortOversigt = new Button("Kort Oversigt", width/3, height/3, width/3, height/3);
-  Overfør = new Button("Overfør", width/3, height/3, width/3, height/3);
-  FastBetaling = new Button("Fast Betaling", width/3, height/3, width/3, height/3);
-  BetalRegning = new Button("Betal Regning", width/3, height/3, width/3, height/3);
-  Pension = new Button("Pension", width/3, height/3, width/3, height/3);
-  Forsikring = new Button("Forskiring", width/3, height/3, width/3, height/3);
+  Overblik = new Button("Overblik", 103, 246, 545-101, 360-246);
+  KontoBudget = new Button("Konto & Budget", 103, 360, 545-102, 462-360);
+  BetalOverfør = new Button("Betal & Overfør", 103, 464, 545-103, 555-464);
+  PensionForsikring = new Button("Pension & Forsikring", 103, 555, 545-103, 663-555);
+  LogAfBank = new Button("Log af", 1465, 0, 1919-1465, 123);
 
-  Sundhedsjournal = new Button("Sundhedsjournal", width/7, height/6, 2*(width/7), height/2);
-  Registreringer = new Button("Registreringer", 4*(width/7), height/6, 2*(width/7), height/2);
+  KontoBevægelser = new Button("KontoBevægelser", 117, 364, 898-117, 567-364);
+  KortOversigt = new Button("Kort Oversigt", 1023, 363, 1807-1023, 568-363);
+
+  Overfør = new Button("Overfør", 434, 281, 1480-434, 441-281);
+  FastBetaling = new Button("Fast Betaling", 434, 670, 1480-434, 840-670);
+  BetalRegning = new Button("Betal Regning", 434, 478, 1480-434, 640-478);
+
+  Pension = new Button("Pension", 435, 379, 1480-435, 541-370);
+  Forsikring = new Button("Forskiring", 438, 579, 1486-438, 740-580);
+
+  Sundhedsjournal = new Button("Sundhedsjournal", 188, 491, 836-188, 616-491);
+  Registreringer = new Button("Registreringer", 1193, 501, 1691-1193, 620-501);
 
   Konsultationer  = new Button("Konsultationer", 675, 356, 1238-675, 476-356);
   PraktiserendeLæge  = new Button("Praktiserendelæge", 73, 556, 638-73, 678-556);
@@ -151,15 +156,14 @@ void setup() {
   Laboratorie  = new Button("Laboratorie", 73, 756, 638-73, 877-756);
   Medicinkort  = new Button("Medicinkort", 1278, 556, 1840-1278, 678-556);
 
-  Recepter  = new Button("Recepter", width/3, height/3, width/4, height/3);
+  Recepter  = new Button("Recepter", 1078, 354, 1769-1078, 803-354);
+  Medicin  = new Button("Medicin", 155, 354, 843-155, 803-354);
 
-  Medicinkort2  = new Button("Medicinkort2", width/3, height/3, width/3, height/3);
-
-  ScreeningBryst  = new Button("ScreeningBryst", width/3, height/3, width/3, height/3);
-  ScreeningTarm  = new Button("ScreeningTarm", width/3, height/3, width/3, height/3);
-  ScreeningLivmoder  = new Button("ScreeningLivmoder", width/3, height/3, width/3, height/3);
-  Behandlingstestamente  = new Button("Behandlingstestamente", width/3, height/3, width/3, height/3);
-  Stamkort  = new Button("Stamkort", width/3, height/3, width/3, height/3);
+  ScreeningBryst  = new Button("ScreeningBryst", 74, 357, 637-74, 483-357);
+  ScreeningTarm  = new Button("ScreeningTarm", 1277, 359, 1840-1277, 480-359 );
+  ScreeningLivmoder  = new Button("ScreeningLivmoder", 1274, 560, 1843-1274, 683-560);
+  Behandlingstestamente  = new Button("Behandlingstestamente", 675, 357, 1242-675, 483-357);
+  Stamkort  = new Button("Stamkort", 73, 561, 638-73, 682-561);
 }
 
 void draw() {
@@ -184,265 +188,125 @@ void draw() {
   }
 
   // Load Side Elementer
-
   switch (page) {
   case 1:
     codeField.update();
-    Luk.draw();
-    break;
-  case 2:
-    Ebox.draw();
-    Sundhed.draw();
-    Borger.draw();
-    Netbank.draw();
-    Sidst.draw();
-    Luk.draw();
     break;
   case 3:
     eboxField.update();
-    Tilbage.draw();
-    GlemteKode.draw();
-    break;
-  case 4:
-    Tilbage.draw();
-    Nordea.draw();
-    DanskeBank.draw();
-    JyskeBank.draw();
-    break;
-  case 5:
-    Tilbage.draw();
-    break;
-  case 6:
-    Tilbage.draw();
-    Virksomheder.draw();
-    Offentlige.draw();
-    break;
-  case 7:
-    //Tilbage.draw();
-    break;
-  case 8:
-    //Tilbage.draw();
-    break;
-  case 9:
-    Tilbage.draw();
-    Ydelser.draw();
-    Sager.draw();
-    Personlige.draw();
-    Gæld.draw();
-    Aftaler.draw();
-    Hjælpemidler.draw();
-    break;
-  case 10:
-    Tilbage.draw();
-    break;
-  case 11:
-    Tilbage.draw();
-    break;
-  case 12:
-    Tilbage.draw();
-    PO.draw();
-    Bolig.draw();
-    break;
-  case 13:
-    Tilbage.draw();
-    break;
-  case 14:
-    Tilbage.draw();
-    break;
-  case 15:
-    Tilbage.draw();
     break;
   case 16:
     netbankField.update();
-    Tilbage.draw();
-    GlemteKode.draw();
-    break;
-  case 17:
-    Tilbage.draw();
-    break;
-  case 18:
-    Tilbage.draw();
     break;
   case 19:
     borgerField.update();
-    Tilbage.draw();
-    GlemteKode.draw();
-    break;
-  case 20:
-    Tilbage.draw();
-    break;
-  case 21:
-    Tilbage.draw();
-    KontoBudget.draw();
-    BetalOverfør.draw();
-    PensionForsikring.draw();
-    break;
-  case 22:
-    Tilbage.draw();
-    KontoBevægelser.draw();
-    KortOversigt.draw();
-    break;
-  case 23:
-    Tilbage.draw();
-    break;
-  case 24:
-    Tilbage.draw();
-    break;
-  case 25:
-    Tilbage.draw();
-    break;
-  case 26:
-    Tilbage.draw();
-    break;
-  case 27:
-    Tilbage.draw();
-    break;
-  case 28:
-    Tilbage.draw();
-    Pension.draw();
-    Forsikring.draw();
-    break;
-  case 29:
-    Tilbage.draw();
-    break;
-  case 30:
-    Tilbage.draw();
-    break;
-  case 31:
-    Tilbage.draw();
-    break;
-  case 32:
-    Tilbage.draw();
-    Overfør.draw();
-    FastBetaling.draw();
-    BetalRegning.draw();
-    break;
-  case 33:
-    Tilbage.draw();
     break;
   case 34:
     sundhedField.update();
-    Tilbage.draw();
-    GlemteKode.draw();
-    break;
-  case 35:
-    Tilbage.draw();
-    Sundhedsjournal.draw();
-    Registreringer.draw();
-    break;
-  case 36:
-    Tilbage.draw();
-    SundhedAftaler.draw();
-    
-    Konsultationer.draw();
-     PraktiserendeLæge.draw();
-     Journal.draw();
-     Henvisninger.draw();
-     
-     Vacciner.draw();
-     Laboratorie.draw();
-     Medicinkort.draw();
-    //Medicinkort2.draw();
-    //Recepter.draw();
-
     break;
   }
 }
 
 void keyPressed() {
-  if (page == 1) {
-    if (key != 32 && key != CODED) {
+  if (key != 32 && key != CODED) {
+    if (page == 1) {
       codeField.keyPressed();
-    } else if (key == 32) {
-      String code = codeField.getText();
-      if (code.equals(validCode)) {
-        page++;
-      } else {
-        fill(255, 0, 0);
-        textSize(16);
-        text("Invalid username.", width/2, 180);
-      }
-    }
-  } else if (page == 3) {
-    if (key != 32 && key != CODED) {
+    } else if (page == 3) {
       eboxField.keyPressed();
-    } else if (key == 32) {
-      String code = eboxField.getText();
-      if (code.equals(NemID)) {
-        page = page+3;
-      } else {
-        fill(255, 0, 0);
-        textSize(16);
-        text("Invalid username.", width/2, 180);
-      }
-    }
-  } else if (page == 19) {
-    if (key != 32 && key != CODED) {
-      borgerField.keyPressed();
-    } else if (key == 32) {
-      String code = borgerField.getText();
-      if (code.equals(NemID)) {
-        page = 9;
-      } else {
-        fill(255, 0, 0);
-        textSize(16);
-        text("Invalid username.", width/2, 180);
-      }
-    }
-  } else if (page == 16) {
-    if (key != 32 && key != CODED) {
+    } else if (page == 16) {
       netbankField.keyPressed();
-    } else if (key == 32) {
-      String code = netbankField.getText();
-      if (code.equals(NemID)) {
-        page = 21;
-      } else {
-        fill(255, 0, 0);
-        textSize(16);
-        text("Invalid username.", width/2, 180);
-      }
-    }
-  } else if (page == 34) {
-    if (key != 32 && key != CODED) {
+    } else if (page == 19) {
+      borgerField.keyPressed();
+    } else if (page == 34) {
       sundhedField.keyPressed();
-    } else if (key == 32) {
-      String code = sundhedField.getText();
-      if (code.equals(NemID)) {
-        page = 35;
-      } else {
-        fill(255, 0, 0);
-        textSize(16);
-        text("Invalid username.", width/2, 180);
-      }
     }
   }
 }
 
-void mousePressed() {
+/*
+
+}   else if (page == 3) {
+  if (key != 32 && key != CODED) {
+    eboxField.keyPressed();
+  } else if (key == 32) {
+    String code = eboxField.getText();
+    if (code.equals(NemID)) {
+      page = page+3;
+    } else {
+      fill(255, 0, 0);
+      textSize(16);
+      text("Invalid username.", width/2, 180);
+    }
+  }
+} else if (page == 19) {
+  if (key != 32 && key != CODED) {
+    borgerField.keyPressed();
+  } else if (key == 32) {
+    String code = borgerField.getText();
+    if (code.equals(NemID)) {
+      page = 9;
+    } else {
+      fill(255, 0, 0);
+      textSize(16);
+      text("Invalid username.", width/2, 180);
+    }
+  }
+} else if (page == 16) {
+  if (key != 32 && key != CODED) {
+    netbankField.keyPressed();
+  } else if (key == 32) {
+    String code = netbankField.getText();
+    if (code.equals(NemID)) {
+      page = 21;
+    } else {
+      fill(255, 0, 0);
+      textSize(16);
+      text("Invalid username.", width/2, 180);
+    }
+  }
+} else if (page == 34) {
+  if (key != 32 && key != CODED) {
+    sundhedField.keyPressed();
+  } else if (key == 32) {
+    String code = sundhedField.getText();
+    if (code.equals(NemID)) {
+      page = 35;
+    } else {
+      fill(255, 0, 0);
+      textSize(16);
+      text("Invalid username.", width/2, 180);
+    }
+  }
+}
+}
+*/
+  void mousePressed() {
   println(""+mouseX, mouseY);
   switch (page) {
   case 1:
     if (Luk.isClicked()) {
       exit();
+    } else if (Fortsæt2.isClicked()) {
+      String code = codeField.getText();
+      if (code.equals(validCode)) {
+        page = 2;
+      } else {
+        fill(255, 0, 0);
+        textSize(32);
+        text("Forkert kode", width/2, 180+(636-173));
+      }
     }
     break;
   case 2:
     if (Ebox.isClicked()) {
       page++;
-    }
-    if (Sundhed.isClicked()) {
+    } else if (Sundhed.isClicked()) {
       page = 34;
-    }
-    if (Borger.isClicked()) {
+    } else if (Borger.isClicked()) {
       page = 19;
-    }
-    if (Netbank.isClicked()) {
+    } else if (Netbank.isClicked()) {
       page = page+2;
-    }
-    if (Sidst.isClicked()) {
-      // Login button is clicked
-    }
-    if (Luk.isClicked()) {
+    } else if (Luk2.isClicked()) {
       exit();
     }
     break;
@@ -451,6 +315,15 @@ void mousePressed() {
       page = 2;
     } else if (GlemteKode.isClicked()) {
       page = 5;
+    } else if (Fortsæt.isClicked()) {
+      String code = eboxField.getText();
+      if (code.equals(NemID)) {
+        page = 6;
+      } else {
+        fill(255, 0, 0);
+        textSize(32);
+        text("Forkert Login", width/2, 180+(636-173));
+      }
     }
     break;
   case 4:
@@ -472,6 +345,8 @@ void mousePressed() {
       page = 8;
     } else if (Offentlige.isClicked()) {
       page = 7;
+    } else if (Luk2.isClicked()) {
+      exit();
     }
     break;
   case 7:
@@ -499,6 +374,8 @@ void mousePressed() {
       page = 14;
     } else if (Hjælpemidler.isClicked()) {
       page = 11;
+    } else if (Luk2.isClicked()) {
+      exit();
     }
     break;
   case 10:
@@ -540,6 +417,15 @@ void mousePressed() {
       page = 4;
     } else if (GlemteKode.isClicked()) {
       page = 31;
+    } else if (Fortsæt.isClicked()) {
+      String code = netbankField.getText();
+      if (code.equals(NemID)) {
+        page = 21;
+      } else {
+        fill(255, 0, 0);
+        textSize(32);
+        text("Forkert Login", width/2, 180+(636-173));
+      }
     }
     break;
   case 17:
@@ -557,46 +443,130 @@ void mousePressed() {
       page = 2;
     } else if (GlemteKode.isClicked()) {
       page = 20;
+    } else if (Fortsæt.isClicked()) {
+      String code = borgerField.getText();
+      if (code.equals(NemID)) {
+        page = 9;
+      } else {
+        fill(255, 0, 0);
+        textSize(32);
+        text("Forkert Login", width/2, 180+(636-173));
+      }
     }
     break;
   case 20:
     if (Tilbage.isClicked()) {
       page = 19;
     }
-
     break;
   case 21:
     if (Tilbage.isClicked()) {
       page = 2;
+    } else if (LogAfBank.isClicked()) {
+      page = 4;
+    } else if (KontoBudget.isClicked()) {
+      page = 22;
+    } else if (BetalOverfør.isClicked()) {
+      page = 32;
+    } else if (PensionForsikring.isClicked()) {
+      page = 28;
+    } else if (Overblik.isClicked()) {
+      page = 21;
     }
+    break;
   case 22:
     if (Tilbage.isClicked()) {
       page = 21;
+    } else if (KontoBevægelser.isClicked()) {
+      page = 23;
+    } else if (KortOversigt.isClicked()) {
+      page = 24;
     }
+    break;
   case 23:
     if (Tilbage.isClicked()) {
+      page = 2;
+    } else if (LogAfBank.isClicked()) {
+      page = 4;
+    } else if (KontoBudget.isClicked()) {
       page = 22;
+    } else if (BetalOverfør.isClicked()) {
+      page = 32;
+    } else if (PensionForsikring.isClicked()) {
+      page = 28;
+    } else if (Overblik.isClicked()) {
+      page = 21;
     }
+    break;
   case 24:
     if (Tilbage.isClicked()) {
+      page = 2;
+    } else if (LogAfBank.isClicked()) {
+      page = 4;
+    } else if (KontoBudget.isClicked()) {
       page = 22;
+    } else if (BetalOverfør.isClicked()) {
+      page = 32;
+    } else if (PensionForsikring.isClicked()) {
+      page = 28;
+    } else if (Overblik.isClicked()) {
+      page = 21;
     }
+    break;
   case 25:
     if (Tilbage.isClicked()) {
+      page = 2;
+    } else if (LogAfBank.isClicked()) {
+      page = 4;
+    } else if (KontoBudget.isClicked()) {
+      page = 22;
+    } else if (BetalOverfør.isClicked()) {
       page = 32;
+    } else if (PensionForsikring.isClicked()) {
+      page = 28;
+    } else if (Overblik.isClicked()) {
+      page = 21;
     }
+    break;
   case 26:
     if (Tilbage.isClicked()) {
+      page = 2;
+    } else if (LogAfBank.isClicked()) {
+      page = 4;
+    } else if (KontoBudget.isClicked()) {
+      page = 22;
+    } else if (BetalOverfør.isClicked()) {
       page = 32;
+    } else if (PensionForsikring.isClicked()) {
+      page = 28;
+    } else if (Overblik.isClicked()) {
+      page = 21;
     }
+    break;
   case 27:
     if (Tilbage.isClicked()) {
+      page = 2;
+    } else if (LogAfBank.isClicked()) {
+      page = 4;
+    } else if (KontoBudget.isClicked()) {
+      page = 22;
+    } else if (BetalOverfør.isClicked()) {
       page = 32;
+    } else if (PensionForsikring.isClicked()) {
+      page = 28;
+    } else if (Overblik.isClicked()) {
+      page = 21;
     }
+    break;
   case 28:
     if (Tilbage.isClicked()) {
       page = 21;
+    } else if (Pension.isClicked()) {
+      page = 23;
+    } else if (Forsikring.isClicked()) {
+      page = 24;
     }
+    break;
   case 29:
     if (Tilbage.isClicked()) {
       page = 28;
@@ -605,12 +575,23 @@ void mousePressed() {
     if (Tilbage.isClicked()) {
       page = 28;
     }
-
     break;
   case 31:
     if (Tilbage.isClicked()) {
       page = 16;
     }
+    break;
+  case 32:
+    if (Tilbage.isClicked()) {
+      page = 21;
+    } else if (Overfør.isClicked()) {
+      page = 25;
+    } else if (FastBetaling.isClicked()) {
+      page = 27;
+    } else if (BetalRegning.isClicked()) {
+      page = 26;
+    }
+    break;
   case 33:
     if (Tilbage.isClicked()) {
       page = 34;
@@ -621,6 +602,15 @@ void mousePressed() {
       page = 2;
     } else if (GlemteKode.isClicked()) {
       page = 33;
+    } else if (Fortsæt.isClicked()) {
+      String code = sundhedField.getText();
+      if (code.equals(NemID)) {
+        page = 35;
+      } else {
+        fill(255, 0, 0);
+        textSize(32);
+        text("Forkert Login", width/2, 180+(636-173));
+      }
     }
     break;
   case 35:
@@ -630,6 +620,124 @@ void mousePressed() {
       page = 36;
     } else if (Registreringer.isClicked()) {
       page = 47;
+    } else if (Luk2.isClicked()) {
+      exit();
     }
+    break;
+  case 36:
+    if (Tilbage.isClicked()) {
+      page = 35;
+    } else if (SundhedAftaler.isClicked()) {
+      page = 37;
+    } else if (Konsultationer.isClicked()) {
+      page = 38;
+    } else if (Vacciner.isClicked()) {
+      page = 39;
+    } else if (PraktiserendeLæge.isClicked()) {
+      page = 40;
+    } else if (Henvisninger.isClicked()) {
+      page = 41;
+    } else if (Medicinkort.isClicked()) {
+      page = 42;
+    } else if (Laboratorie.isClicked()) {
+      page = 43;
+    } else if (Journal.isClicked()) {
+      page = 44;
+    }
+    break;
+  case 37:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    }
+    break;
+  case 38:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    }
+    break;
+  case 39:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    }
+    break;
+  case 40:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    }
+    break;
+  case 41:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    }
+    break;
+  case 42:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    } else if (Medicin.isClicked()) {
+      page = 45;
+    } else if (Recepter.isClicked()) {
+      page = 46;
+    }
+    break;
+  case 43:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    }
+    break;
+  case 44:
+    if (Tilbage.isClicked()) {
+      page = 36;
+    }
+    break;
+  case 45:
+    if (Tilbage.isClicked()) {
+      page = 42;
+    }
+    break;
+  case 46:
+    if (Tilbage.isClicked()) {
+      page = 42;
+    }
+    break;
+  case 47:
+    if (Tilbage.isClicked()) {
+      page = 35;
+    } else if (ScreeningBryst.isClicked()) {
+      page = 48;
+    } else if (ScreeningTarm.isClicked()) {
+      page = 49;
+    } else if (ScreeningLivmoder.isClicked()) {
+      page = 50;
+    } else if (Behandlingstestamente.isClicked()) {
+      page = 51;
+    } else if (Stamkort.isClicked()) {
+      page = 52;
+    }
+    break;
+  case 48:
+    if (Tilbage.isClicked()) {
+      page = 47;
+    }
+    break;
+  case 49:
+    if (Tilbage.isClicked()) {
+      page = 47;
+    }
+    break;
+  case 50:
+    if (Tilbage.isClicked()) {
+      page = 47;
+    }
+    break;
+  case 51:
+    if (Tilbage.isClicked()) {
+      page = 47;
+    }
+    break;
+  case 52:
+    if (Tilbage.isClicked()) {
+      page = 47;
+    }
+    break;
   }
 }

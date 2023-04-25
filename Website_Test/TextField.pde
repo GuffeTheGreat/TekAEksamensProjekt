@@ -10,15 +10,12 @@ class TextField {
   }
 
   void update() {
-    stroke(0);
     fill(255);
-    rect(x, y, w, h);
     noStroke();
+    rect(x+5, y+5, w-10, h-10);
     fill(0);
-    textSize(x/5);
-    //println(x/5);
-    text(text, width/2, height/2-h/4);
-    textSize(76);
+    textSize(h/2);
+    text(text, x+5+w/2, y+10+h/2);
   }
 
   void keyPressed() {

@@ -12,15 +12,6 @@ class Button {
     this.clicked = false;
   }
 
-  void draw() {
-    stroke(0);
-    fill(255);
-    rect(x, y, w, h);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    text(label, x + w/2, y+ h/2);
-  }
-
   boolean isClicked() {
     if (mousePressed && mouseX >= x && mouseX <= x+ w && mouseY >= y && mouseY <= y + h) {
       clicked = true;
