@@ -223,63 +223,6 @@ void keyPressed() {
   }
 }
 
-/*
-
-}   else if (page == 3) {
-  if (key != 32 && key != CODED) {
-    eboxField.keyPressed();
-  } else if (key == 32) {
-    String code = eboxField.getText();
-    if (code.equals(NemID)) {
-      page = page+3;
-    } else {
-      fill(255, 0, 0);
-      textSize(16);
-      text("Invalid username.", width/2, 180);
-    }
-  }
-} else if (page == 19) {
-  if (key != 32 && key != CODED) {
-    borgerField.keyPressed();
-  } else if (key == 32) {
-    String code = borgerField.getText();
-    if (code.equals(NemID)) {
-      page = 9;
-    } else {
-      fill(255, 0, 0);
-      textSize(16);
-      text("Invalid username.", width/2, 180);
-    }
-  }
-} else if (page == 16) {
-  if (key != 32 && key != CODED) {
-    netbankField.keyPressed();
-  } else if (key == 32) {
-    String code = netbankField.getText();
-    if (code.equals(NemID)) {
-      page = 21;
-    } else {
-      fill(255, 0, 0);
-      textSize(16);
-      text("Invalid username.", width/2, 180);
-    }
-  }
-} else if (page == 34) {
-  if (key != 32 && key != CODED) {
-    sundhedField.keyPressed();
-  } else if (key == 32) {
-    String code = sundhedField.getText();
-    if (code.equals(NemID)) {
-      page = 35;
-    } else {
-      fill(255, 0, 0);
-      textSize(16);
-      text("Invalid username.", width/2, 180);
-    }
-  }
-}
-}
-*/
   void mousePressed() {
   println(""+mouseX, mouseY);
   switch (page) {
